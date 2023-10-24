@@ -24,8 +24,8 @@ public class PalindromeControllerTest {
 
     @Test
     public void testPalindromeLower() throws Exception {
-        String inputNumber = "123";
-        long expectedPalindrome = 121;
+        String inputNumber = "106"; // tie for 111 and 101
+        long expectedPalindrome = 101; // should return 101 as it's less than 111
 
         when(palindromeService.findClosestPalindrome(Long.parseLong(inputNumber)))
             .thenReturn(expectedPalindrome);
