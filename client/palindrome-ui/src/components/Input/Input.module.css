@@ -1,0 +1,19 @@
+.inputContainer {
+  margin-bottom: 1rem;
+}
+
+.label {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+.input {
+  margin: 0 .5rem;
+  padding: 0.375rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}

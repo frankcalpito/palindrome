@@ -1,31 +1,41 @@
 import React, { useState } from "react";
 import "./App.css";
-import axios from "axios";
+import palindromeService from "./services/palindromeService";
+import Input from "./components/Input/Input";
+import Button from "./components/Button/Button";
 
-function findNearestPalindrome() {
-  console.log(
-    "TODO: link Jira story to create a task for assigning someone to this 🙃"
-  );
-  return null;
-}
 
 function App() {
-  const responseValue = "121";
+  const [number, setNumber] = useState();
+  const [result, setResult] = useState();
+  const [loading, setLoading] = useState(false);
+
+  const handleFindClosestPalindromeClick = async () => {
+    setLoading(true);
+    const closestPalindrome = await palindromeService.findClosestPalindrome(number);
+    setResult(closestPalindrome);
+    setLoading(false);
+  }
+
   return (
     <div className="App">
       <h1>Palindrome</h1>
-      <input
-        onChange={(e) => {
-          console.log(e);
+      <Input
+        type="number"
+        label="Number"
+        onChange={(value) => {
+          setNumber(value);
         }}
         role="region"
       />
-      <button onClick={findNearestPalindrome} aria-label="button">
-        Submit
-      </button>
-      <div>
-        <strong>The answer is: </strong>
-        <p>{responseValue}</p>
+      <Button
+        onClick={handleFindClosestPalindromeClick}
+        loading={loading}
+        label="Find closest palindrome"
+        aria-label="Find closest palindrome" />
+      <div className={['result', result ? 'show' : null].join(' ')}>
+        <span>The answer is:</span>
+        <p>{result}</p>
       </div>
     </div>
   );

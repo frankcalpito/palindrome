@@ -1,3 +1,46 @@
 .App {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.result {
+  transform: translateX(100%);
+  opacity: 0;
+  padding: 2rem;
+  background-color: #1976d280;
+  border-radius: .25rem;
+  transition: all 1s;
+}
+
+.result.show {
+  opacity: 100%;
+  transform: translateX(0%);
+}
+
+.result span {
+  font-size: .875rem;
+}
+
+.result p {
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin-bottom: 0;
+}
+
+@media (min-width: 600px) {
+  .result span {
+    font-size: 1rem;
+  }
+  
+  .result p {
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
 }

@@ -1,0 +1,41 @@
+.button {
+  display: inline-flex;
+  justify-content: center;
+  background-color: transparent;
+  padding: .5rem 1.5rem;
+  border: 1px solid #1976d2;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  font-weight: 200;
+  color: #1976d2;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.button:disabled {
+ cursor: progress;
+}
+
+.loading {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #1976d2; 
+  animation: color-spin  5s linear infinite;
+}
+
+@keyframes color-spin {
+  0% {
+    transform: rotate(0deg);
+    background-color: #1976d2;
+  }
+
+  50% {
+    transform: rotate(90deg); /* Rotate halfway */
+    background-color: #33a6ff; /* Change color in the middle */
+  }
+
+  100% {
+    transform: rotate(360deg); /* Rotate to the end */
+    background-color: #1976d2; /* Return to the original color */
+  }
+}
