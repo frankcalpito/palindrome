@@ -16,6 +16,11 @@
  cursor: progress;
 }
 
+.buttonIcon {
+  margin-right: .5rem;
+  fill: #155391;
+}
+
 .loading {
   width: 1.5rem;
   height: 1.5rem;

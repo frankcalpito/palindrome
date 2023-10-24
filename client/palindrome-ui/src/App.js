@@ -4,6 +4,7 @@ import palindromeService from "./services/palindromeService";
 import Input from "./components/Input/Input";
 import Button from "./components/Button/Button";
 
+import { ReactComponent as SearchSVG } from "./assets/images/magnifying-glass.svg";
 
 function App() {
   const [number, setNumber] = useState();
@@ -32,6 +33,7 @@ function App() {
         onClick={handleFindClosestPalindromeClick}
         loading={loading}
         label="Find closest palindrome"
+        Icon={SearchSVG}
         aria-label="Find closest palindrome" />
       <div className={['result', result ? 'show' : null].join(' ')}>
         <span>The answer is:</span>
