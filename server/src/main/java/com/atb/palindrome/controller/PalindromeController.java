@@ -42,6 +42,12 @@ public class PalindromeController {
             String number
     ){
         long num = Long.parseLong(number);
+
+        // Do not accept negative numbers
+        if (num < 0) {
+            return ResponseEntity.badRequest().body(  "Number must be non-negative");
+        }
+    
         long closestPalindrome = palindromeService.findClosestPalindrome(num);
         return ResponseEntity.ok().body("" + closestPalindrome);
     }
