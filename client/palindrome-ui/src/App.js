@@ -35,7 +35,7 @@ function App() {
           if (value >= 0) {
             setNumber(() => value);
           } else {
-            e.target.value = 0
+            e.target.value = null
           }
         }}
         role="region"
