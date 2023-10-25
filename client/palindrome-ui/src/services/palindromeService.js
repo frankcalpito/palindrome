@@ -7,7 +7,9 @@ const palindromeService = {
 
     try {
       // Make the GET request
-      const response = await axios.get(endpointURL);
+      const response = await axios.get(endpointURL, {
+        responseType: 'text', // Set responseType to 'text'
+      });
 
       // Handle a successful response here
       if (response.status === 200) {

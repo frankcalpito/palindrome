@@ -15,7 +15,13 @@
 }
 
 .button:disabled {
- cursor: progress;
+  cursor: not-allowed;
+  border-color: #777777;
+  color: #777777;
+}
+
+.button:disabled .buttonIcon{
+  fill: #777777;
 }
 
 .buttonIcon {

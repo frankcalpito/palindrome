@@ -3,7 +3,7 @@ import styles from './Input.module.css';
 
 const Input = ({ label, defaultValue, onChange, ...props }) => {
   const handleChange = (e) => {
-    onChange && onChange(e.target.value);
+    onChange && onChange(e.target.value || null, e);
   }
 
   return (

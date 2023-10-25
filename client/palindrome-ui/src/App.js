@@ -16,9 +16,10 @@ function App() {
     const closestPalindrome = await palindromeService.findClosestPalindrome(number);
 
     if (isNaN(closestPalindrome)) {
+      // handle error
       alert(closestPalindrome);
     } else {
-      setResult(closestPalindrome);
+      setResult(closestPalindrome.toString());
     }
     setLoading(false);
   }
@@ -29,8 +30,13 @@ function App() {
       <Input
         type="number"
         label="Number"
-        onChange={(value) => {
-          setNumber(value);
+        min={0} // negative numbers are not palindromic
+        onChange={(value, e) => {
+          if (value >= 0) {
+            setNumber(() => value);
+          } else {
+            e.target.value = 0
+          }
         }}
         role="region"
       />
@@ -38,8 +44,9 @@ function App() {
         onClick={handleFindClosestPalindromeClick}
         loading={loading}
         label="Find closest palindrome"
+        disabled={number === undefined || number === null}
         Icon={SearchSVG}/>
-      <div className={['result', result ? 'show' : null].join(' ')}>
+      <div className={['result', result !== undefined ? 'show' : null].join(' ')}>
         <span>The answer is:</span>
         <p>{result}</p>
       </div>
