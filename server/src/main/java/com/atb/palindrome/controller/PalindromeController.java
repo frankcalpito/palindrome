@@ -48,7 +48,9 @@ public class PalindromeController {
             return ResponseEntity.badRequest().body(  "Number must be non-negative");
         }
     
-        long closestPalindrome = palindromeService.findClosestPalindrome(num);
+        // long closestPalindrome = palindromeService.findClosestPalindrome(num);
+        String closestPalindrome = palindromeService.findClosestPalindrome2(number);
+
         return ResponseEntity.ok().body("" + closestPalindrome);
     }
 }

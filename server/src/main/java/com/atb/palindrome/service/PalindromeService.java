@@ -1,5 +1,9 @@
 package com.atb.palindrome.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +16,70 @@ public class PalindromeService {
     		if (isPalindrome(num + i))
     			return num + i;
         }
+    }
+
+    /**
+     * algorithm from https://www.geeksforgeeks.org/closest-palindrome-number-whose-absolute-difference-min/
+     * 
+     * @param n
+     * @return
+     */
+    public String findClosestPalindrome2(String n) {
+
+        // Initialize a list to store the candidate palindromic numbers
+        List<Long> candidates = new ArrayList<>();
+ 
+        // Get the length of the input number n
+        int length = n.length();
+ 
+        // Calculate the index of the middle element (or the element just after the middle for even-length numbers)
+        int mid = (length + 1) / 2;
+ 
+        // If the input number has only one digit, the closest palindromic number is (n-1) except when it's 0
+        if (length == 1) {
+            long num = Long.parseLong(n);
+            return String.valueOf(num == 0 ? 1 : num - 1);
+        }
+ 
+        // Add two candidates: (10^n + 1) and (10^(n-1) - 1)
+        candidates.add((long) Math.pow(10, length) + 1);
+        candidates.add((long) Math.pow(10, length - 1) - 1);
+ 
+        // Extract the prefix (first half) of the input number
+        int prefix = Integer.parseInt(n.substring(0, mid));
+ 
+        // Generate three possible prefixes by incrementing and decrementing the original prefix
+        List<Integer> temp = Arrays.asList(prefix, prefix + 1, prefix - 1);
+ 
+        // Construct the candidate palindromic numbers using the generated prefixes
+        for (int i : temp) {
+            String res = String.valueOf(i);
+            // If the length of the input number is odd, exclude the last character while constructing the palindromic number
+            if ((length & 1) != 0) {
+                res = res.substring(0, res.length() - 1);
+            }
+            // Create the palindromic number by appending the reverse of the prefix
+            String peep = i + new StringBuilder(res).reverse().toString();
+            candidates.add(Long.parseLong(peep));
+        }
+ 
+        // Initialize variables to keep track of the minimum difference and the closest palindromic number
+        long minDiff = Long.MAX_VALUE;
+        long result = Long.parseLong(n);
+        long tip = Long.parseLong(n);
+ 
+        // Iterate through the candidate palindromic numbers and find the closest one to the input number
+        for (int i = 0; i < 5; i++) {
+            long candidate = candidates.get(i);
+            if (candidate != tip && minDiff > Math.abs(candidate - tip)) {
+                result = candidate;
+                minDiff = Math.abs(candidate - tip);
+            } else if (Math.abs(candidate - tip) == minDiff) {
+                result = Math.min(result, candidate);
+            }
+        }
+ 
+        return String.valueOf(result);
     }
 
     public boolean isPalindrome(long num) {
