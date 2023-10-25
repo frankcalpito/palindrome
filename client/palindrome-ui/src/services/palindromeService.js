@@ -22,7 +22,7 @@ const palindromeService = {
     } catch (error) {
       // Handle errors here
       console.error('Error:', error);
-      throw error;
+      return error.toString();
     }
   },
 };

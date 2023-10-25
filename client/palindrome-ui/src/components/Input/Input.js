@@ -13,6 +13,7 @@ const Input = ({ label, defaultValue, onChange, ...props }) => {
         type="text"
         className={styles.input}
         defaultValue={defaultValue}
+        aria-label={label}
         onChange={handleChange}
         { ...props }
       />

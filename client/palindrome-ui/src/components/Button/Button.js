@@ -15,12 +15,12 @@ const Button = ({ type="button", Icon, loading = false, label, onClick, disabled
       type={type}
       className={styles.button}
       onClick={handleClick}
-      disabled={disabled}
+      disabled={disabled || loading}
       {...props}
     >
       {props.children ? props.children : (
         <>
-          {Icon ? <Icon className={styles.buttonIcon} /> : ''}
+          {Icon && !loading ? <Icon className={styles.buttonIcon} /> : ''}
           {loading ? '' : label}
           {loading && <LoadingSpinner className={styles.loading} role="status" />}
         </>

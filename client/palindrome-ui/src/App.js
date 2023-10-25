@@ -14,7 +14,12 @@ function App() {
   const handleFindClosestPalindromeClick = async () => {
     setLoading(true);
     const closestPalindrome = await palindromeService.findClosestPalindrome(number);
-    setResult(closestPalindrome);
+
+    if (isNaN(closestPalindrome)) {
+      alert(closestPalindrome);
+    } else {
+      setResult(closestPalindrome);
+    }
     setLoading(false);
   }
 
@@ -33,8 +38,7 @@ function App() {
         onClick={handleFindClosestPalindromeClick}
         loading={loading}
         label="Find closest palindrome"
-        Icon={SearchSVG}
-        aria-label="Find closest palindrome" />
+        Icon={SearchSVG}/>
       <div className={['result', result ? 'show' : null].join(' ')}>
         <span>The answer is:</span>
         <p>{result}</p>
