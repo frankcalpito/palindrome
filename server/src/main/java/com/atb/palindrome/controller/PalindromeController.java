@@ -36,7 +36,7 @@ public class PalindromeController {
     @GetMapping(value = "/palindrome/{number}")
     public ResponseEntity<Object> palindrome(
             @Parameter(description = "String representing an integer")
-            @PathVariable @Pattern(regexp = "^-?\\d+$", message = "Invalid number format") // check for a valid integer format
+            @PathVariable @Pattern(regexp = "^\\d+$", message = "Invalid number format") // check for a valid integer format
             @Min(value = 0, message = "Number is too small") // check for min value
             @Max(value = Long.MAX_VALUE, message = "Number is too large") // check for max value
             String number
