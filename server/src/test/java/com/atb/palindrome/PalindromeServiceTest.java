@@ -1,6 +1,7 @@
 package com.atb.palindrome;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.atb.palindrome.service.PalindromeService;
@@ -11,6 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class PalindromeServiceTest {
 
     private PalindromeService palindromeService;
+   
+    @Autowired
+    public PalindromeServiceTest(PalindromeService palindromeService) {
+        this.palindromeService = palindromeService;
+    }
 
     @Test
     public void testFindClosestPalindrome() {
