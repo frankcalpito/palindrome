@@ -1,4 +1,4 @@
-package com.atb.palindrome;
+package com.atb.palindrome.service;
 
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class PalindromeService {
         }
     }
 
-    boolean isPalindrome(long num) {
+    public boolean isPalindrome(long num) {
         long original = num;
         long reversed = 0;
         

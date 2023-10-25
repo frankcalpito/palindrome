@@ -1,14 +1,15 @@
 package com.atb.palindrome;
 
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import com.atb.palindrome.service.PalindromeService;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 public class PalindromeServiceTest {
 
-    @Autowired
     private PalindromeService palindromeService;
 
     @Test
