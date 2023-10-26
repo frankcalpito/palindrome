@@ -29,6 +29,26 @@ public class PalindromeServiceTest {
     }
 
     @Test
+    public void testFindClosestPalindrome2() {
+        String inputNumber = "123";
+        String expectedPalindrome = "121";
+
+        String closestPalindrome = palindromeService.findClosestPalindrome2(inputNumber);
+
+        assertEquals(expectedPalindrome, closestPalindrome);
+    }
+
+    @Test
+    public void testFindClosestPalindromeLargeNumber() {
+        String inputNumber = "9223372036854716000";
+        String expectedPalindrome = "9223372036302733229";
+
+        String closestPalindrome = palindromeService.findClosestPalindrome2(inputNumber);
+
+        assertEquals(expectedPalindrome, closestPalindrome);
+    }
+
+    @Test
     public void testIsPalindrome() {
         // Test a few cases of isPalindrome
         long palindromeNumber = 12321;

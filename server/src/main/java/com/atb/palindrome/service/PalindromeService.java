@@ -21,6 +21,8 @@ public class PalindromeService {
     /**
      * algorithm from https://www.geeksforgeeks.org/closest-palindrome-number-whose-absolute-difference-min/
      * 
+     * fixed bugs for some scenarios (9223372036854716000)
+     * 
      * @param n
      * @return
      */
@@ -41,26 +43,36 @@ public class PalindromeService {
             return String.valueOf(num == 0 ? 1 : num - 1);
         }
  
-        // Add two candidates: (10^n + 1) and (10^(n-1) - 1)
-        candidates.add((long) Math.pow(10, length) + 1);
+        // Extract the prefix (first half) of the input number
+        long prefix = Long.parseLong(n.substring(0, mid));
+ 
+        // Add candidate: (10^n + 1) if it's not negative
+        long candidate1 = (long) Math.pow(10, length) + 1;
+        if (candidate1 > 0) {
+        	candidates.add(candidate1);
+        }
+        
+        // Add candidate: (10^(n-1) - 1)
         candidates.add((long) Math.pow(10, length - 1) - 1);
  
-        // Extract the prefix (first half) of the input number
-        int prefix = Integer.parseInt(n.substring(0, mid));
- 
         // Generate three possible prefixes by incrementing and decrementing the original prefix
-        List<Integer> temp = Arrays.asList(prefix, prefix + 1, prefix - 1);
+        List<Long> temp = Arrays.asList(prefix, prefix + 1, prefix - 1);
  
         // Construct the candidate palindromic numbers using the generated prefixes
-        for (int i : temp) {
-            String res = String.valueOf(i);
-            // If the length of the input number is odd, exclude the last character while constructing the palindromic number
-            if ((length & 1) != 0) {
-                res = res.substring(0, res.length() - 1);
-            }
-            // Create the palindromic number by appending the reverse of the prefix
-            String peep = i + new StringBuilder(res).reverse().toString();
-            candidates.add(Long.parseLong(peep));
+        for (Long i : temp) {
+        	try {
+                String res = String.valueOf(i);
+                // If the length of the input number is odd, exclude the last character while constructing the palindromic number
+                if ((length & 1) != 0) {
+                    res = res.substring(0, res.length() - 1);
+                }
+                // Create the palindromic number by appending the reverse of the prefix
+                String peep = i + new StringBuilder(res).reverse().toString();
+                candidates.add(Long.parseLong(peep));
+        	} catch (Exception e) {
+        		// failed to parse value larger than max long
+        		System.out.println(e);
+        	}
         }
  
         // Initialize variables to keep track of the minimum difference and the closest palindromic number
@@ -69,7 +81,7 @@ public class PalindromeService {
         long tip = Long.parseLong(n);
  
         // Iterate through the candidate palindromic numbers and find the closest one to the input number
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < candidates.size(); i++) {
             long candidate = candidates.get(i);
             if (candidate != tip && minDiff > Math.abs(candidate - tip)) {
                 result = candidate;

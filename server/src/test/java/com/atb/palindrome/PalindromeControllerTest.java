@@ -28,9 +28,9 @@ public class PalindromeControllerTest {
     @Test
     public void testPalindromeLower() throws Exception {
         String inputNumber = "106"; // tie for 111 and 101
-        long expectedPalindrome = 101; // should return 101 as it's less than 111
+        String expectedPalindrome = "101"; // should return 101 as it's less than 111
 
-        when(palindromeService.findClosestPalindrome(Long.parseLong(inputNumber)))
+        when(palindromeService.findClosestPalindrome2(inputNumber))
             .thenReturn(expectedPalindrome);
 
         mockMvc.perform(MockMvcRequestBuilders.get("/palindrome/{number}", inputNumber)
@@ -42,14 +42,62 @@ public class PalindromeControllerTest {
     @Test
     public void testPalindromeHigher() throws Exception {
         String inputNumber = "119";
+        String expectedPalindrome = "121";
+
+        when(palindromeService.findClosestPalindrome2(inputNumber))
+            .thenReturn(expectedPalindrome);
+        
+        mockMvc.perform(MockMvcRequestBuilders.get("/palindrome/{number}", inputNumber)
+                .contentType(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string(String.valueOf(expectedPalindrome)));
+    }
+
+    @Test
+    public void testOldPalindromeLower() throws Exception {
+        String inputNumber = "106"; // tie for 111 and 101
+        long expectedPalindrome = 101; // should return 101 as it's less than 111
+
+        when(palindromeService.findClosestPalindrome(Long.parseLong(inputNumber)))
+            .thenReturn(expectedPalindrome);
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/palindrome-old/{number}", inputNumber)
+                .contentType(MediaType.TEXT_PLAIN))
+                .andExpect(status().isOk())
+                .andExpect(content().string(String.valueOf(expectedPalindrome)));
+    }
+
+    @Test
+    public void testOldPalindromeHigher() throws Exception {
+        String inputNumber = "119";
         long expectedPalindrome = 121;
 
         when(palindromeService.findClosestPalindrome(Long.parseLong(inputNumber)))
             .thenReturn(expectedPalindrome);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/palindrome/{number}", inputNumber)
+        mockMvc.perform(MockMvcRequestBuilders.get("/palindrome-old/{number}", inputNumber)
                 .contentType(MediaType.TEXT_PLAIN))
                 .andExpect(status().isOk())
                 .andExpect(content().string(String.valueOf(expectedPalindrome)));
+    }
+
+    @Test
+    public void testPalindromeNegativeNumber() throws Exception {
+        String inputNumber = "-5"; // A negative number
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/palindrome/{number}", inputNumber)
+                .contentType(MediaType.TEXT_PLAIN))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Number must be non-negative"));
+    }
+
+    @Test
+    public void testOldPalindromeNegativeNumber() throws Exception {
+        String inputNumber = "-5"; // A negative number
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/palindrome-old/{number}", inputNumber)
+                .contentType(MediaType.TEXT_PLAIN))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Number must be non-negative"));
     }
 }
