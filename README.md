@@ -53,3 +53,12 @@ This project includes both the Java API and ReactJS code:
 # Getting Started 
 
 - Please see [Java API details](/server/README.md)
+
+# Links
+- [Swagger UI](https://palindrome-403123.uc.r.appspot.com/swagger-ui/index.html)
+- [UI](https://palindrome-fccjr.vercel.app/)
+
+# Deployment
+1. Set profile to prod
+2. Build the jar file
+3. `gcloud app deploy target/<name>.jar`
